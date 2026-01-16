@@ -37,7 +37,8 @@ header{background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-inde
 .price{font-weight:800}
 select{padding:8px;border-radius:8px;border:1px solid #ddd}
 
-.buy{margin-top:auto;padding:12px;border:none;border-radius:10px;background:#000;color:#fff;font-weight:700;cursor:pointer}
+.buy{padding:12px;border:none;border-radius:10px;background:#000;color:#fff;font-weight:700;cursor:pointer}
+.add-cart{padding:12px;border:none;border-radius:10px;background:#eee;color:#000;font-weight:700;cursor:pointer}
 
 /* MODAL */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:100}
@@ -96,6 +97,10 @@ footer{text-align:center;padding:20px;color:#666}
 <script>
 const WHATSAPP="5492352537091";
 const MIN=37000;
+
+let cart=[];
+let cartTotal=0;
+let currentOrder=null;
 
 const PRODUCTS=[
 {
@@ -158,7 +163,6 @@ const PRODUCTS=[
 ];
 
 const catalog=document.getElementById("catalog");
-let currentOrder=null;
 const fmt=n=>"$"+Number(n).toLocaleString("es-AR")+" ARG";
 
 function render(cat="all"){
@@ -179,7 +183,10 @@ function render(cat="all"){
         <div class="title">${p.title}</div>
         <select>${Object.entries(p.variants).map(([k,v])=>`<option value="${v}">${k}</option>`).join("")}</select>
         <div class="price">${fmt(firstPrice)}</div>
-        <button class="buy">Comprar</button>
+        <div style="display:flex;gap:8px">
+          <button class="buy">Comprar</button>
+          <button class="add-cart">Agregar</button>
+        </div>
       </div>
     `;
 
@@ -202,6 +209,12 @@ function render(cat="all"){
       openModal();
     };
 
+    card.querySelector(".add-cart").onclick=()=>{
+      cart.push({title:p.title,variant:sel.options[sel.selectedIndex].text,price:Number(sel.value)});
+      cartTotal+=Number(sel.value);
+      alert("Producto agregado al carrito");
+    };
+
     catalog.appendChild(card);
   });
 }
@@ -215,11 +228,16 @@ sendWhatsapp.onclick=()=>{
     alert("Completá todos los datos");return;
   }
 
+  const totalFinal=cart.length?cartTotal:currentOrder.price;
+
   const msg=encodeURIComponent(
 `🛒 Pedido AD Jewels
-Producto: ${currentOrder.title}
-Variante: ${currentOrder.variant}
-Precio: ${fmt(currentOrder.price)}
+${cart.length
+? cart.map(p=>`- ${p.title} (${p.variant}) ${fmt(p.price)}`).join("\n")
+: `- ${currentOrder.title} (${currentOrder.variant}) ${fmt(currentOrder.price)}`
+}
+
+Total: ${fmt(totalFinal)}
 
 Cliente:
 ${nombre.value} ${apellido.value}
