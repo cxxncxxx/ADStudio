@@ -208,15 +208,26 @@ function render(cat="all"){
       updateCartUI();
     };
 
-    card.querySelector(".buy").onclick=()=>{
-      if(Number(sel.value)<MIN){alert("La compra mínima es $37.000 ARG");return;}
-      cart.length=0;
-      cartTotal=Number(sel.value);
-      cart.push({title:p.title,variant:sel.options[sel.selectedIndex].text,price:sel.value});
-      updateCartUI();
-      openCart();
-    };
+   card.querySelector(".buy").onclick=()=>{
+  if(Number(sel.value)<MIN){
+    alert("La compra mínima es $37.000 ARG");
+    return;
+  }
 
+  cart.length = 0;
+  cartTotal = Number(sel.value);
+
+  cart.push({
+    title: p.title,
+    variant: sel.options[sel.selectedIndex].text,
+    price: sel.value,
+    image: p.images[0] // 👈 ESTA ES LA CLAVE
+  });
+
+  updateCartUI();
+  openCart();
+};
+    
     catalog.appendChild(card);
   });
 }
