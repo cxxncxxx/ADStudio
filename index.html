@@ -237,17 +237,29 @@ function updateCartUI(){
 }
 
 function openCart(){
-  const list=document.getElementById("cartItems");
-  list.innerHTML="";
+  const list = document.getElementById("cartItems");
+  list.innerHTML = "";
+
   cart.forEach((p,i)=>{
-    list.innerHTML+=`
-      <div class="cart-item">
-        <span>${p.title} (${p.variant})</span>
-        <span>${fmt(p.price)} <button class="remove" onclick="removeItem(${i})">✕</button></span>
-      </div>`;
+    list.innerHTML += `
+      <div class="cart-item" style="align-items:center;gap:10px">
+        <img src="${p.image}" style="width:45px;height:45px;object-fit:contain;border-radius:6px;background:#f5f5f5">
+        <div style="flex:1">
+          <div style="font-weight:600;font-size:14px">${p.title}</div>
+          <div style="font-size:12px;color:#666">${p.variant}</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-weight:700">${fmt(p.price)}</div>
+          <button class="remove" onclick="removeItem(${i})">✕</button>
+        </div>
+      </div>
+    `;
   });
-  document.getElementById("cartModalTotal").textContent="Total: "+fmt(cartTotal);
-  cartModal.style.display="flex";
+
+  document.getElementById("cartModalTotal").textContent =
+    "Total: " + fmt(cartTotal);
+
+  cartModal.style.display = "flex";
 }
 function closeCart(){cartModal.style.display="none"}
 
