@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>AD Jewels</title>
+<meta name="description" content="AD Jewels - Chains, pulseras y dijes full ice. Joyería urbana premium." />
+<link rel="icon" type="image/jpeg" href="logojoyeria.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#ffffff;
+  --page-bg:#f6f7f9;
+  --text:#111;
+  --muted:#666;
+  --accent:#000;
+  --card-border:#e9e9e9;
+  --max-width:1200px;
+  font-family:'Poppins',sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page-bg);color:var(--text)}
+header{background:#fff;position:sticky;top:0;border-bottom:1px solid #eee;z-index:1000}
+.header-inner{max-width:var(--max-width);margin:auto;display:flex;align-items:center;gap:16px;padding:12px}
+.logo img{width:130px}
+.search{flex:1}
+.search input{width:100%;padding:10px;border-radius:8px;border:1px solid #ddd}
+.header-actions{display:flex;gap:12px;align-items:center}
+
+.cat-nav{max-width:var(--max-width);margin:10px auto;display:flex;gap:12px;padding:0 16px}
+.cat-nav button{border:none;background:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:600}
+.cat-nav button.active{background:#000;color:#fff}
+
+.main{max-width:var(--max-width);margin:auto;padding:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+
+.card{background:#fff;border:1px solid var(--card-border);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.thumb{width:100%;height:220px;object-fit:contain;background:#fafafa;cursor:pointer}
+.meta{padding:14px;display:flex;flex-direction:column;gap:8px}
+.title{font-weight:700}
+.price{font-weight:800}
+select{padding:8px;border-radius:8px;border:1px solid #ddd}
+.actions{display:flex;gap:8px;margin-top:auto}
+.btn{flex:1;padding:10px;border-radius:8px;border:none;cursor:pointer;font-weight:700}
+.buy{background:#000;color:#fff}
+.cart{background:#eee}
+
+footer{text-align:center;padding:30px;color:#666}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <img src="logojoyeria.jpg" alt="AD Jewels">
+    </div>
+    <div class="search">
+      <input placeholder="Buscar chains, pulseras o dijes">
+    </div>
+    <div class="header-actions">
+      🛒 <span id="cartCount">0</span>
+    </div>
+  </div>
+
+  <nav class="cat-nav">
+    <button data-cat="all" class="active">Todos</button>
+    <button data-cat="chains">Chains</button>
+    <button data-cat="pulseras">Pulseras</button>
+    <button data-cat="dijes">Dijes</button>
+  </nav>
+</header>
+
+<main class="main">
+  <section id="catalog" class="grid"></section>
+</main>
+
+<footer>© <span id="year"></span> AD Jewels</footer>
+
+<script>
+const PRODUCTS = [
+  {
+    id:"chain-silver",
+    category:"chains",
+    title:"Cadena Cubana Full Ice Silver",
+    variants:{"40 cm":34000,"45 cm":36000,"50 cm":38000,"55 cm":40600,"60 cm":46000},
+    images:["https://img.kwcdn.com/product/fancy/8f56a2ec-3f46-4b6a-a581-2c1175a2a5b3.jpg"]
+  },
+  {
+    id:"chain-gold",
+    category:"chains",
+    title:"Cadena Cubana Full Ice Gold",
+    variants:{"40 cm":34000,"45 cm":36000,"50 cm":38000,"55 cm":40600,"60 cm":46000},
+    images:["https://img.kwcdn.com/product/fancy/b40c0527-fdf1-4871-a299-df4015b7019f.jpg"]
+  },
+  {
+    id:"bracelet",
+    category:"pulseras",
+    title:"Pulsera Cubana Full Ice Silver",
+    price:16000,
+    images:["https://img.kwcdn.com/product/fancy/b9b97bea-2c53-474e-8288-3f9c97831805.jpg"]
+  },
+  {
+    id:"dije1",
+    category:"dijes",
+    title:"Dije Personalizado Full Ice Type 1",
+    variants:{"1 letra":36000,"2 letras":60000,"3 letras":80000,"4 letras":120000},
+    images:["https://img.kwcdn.com/product/fancy/1ab5d43a-0c48-4af9-95be-b6abadc5d97d.jpg"]
+  }
+];
+
+const catalog=document.getElementById("catalog");
+const cartCount=document.getElementById("cartCount");
+let cart=0;
+
+function fmt(n){return "$"+n.toLocaleString("es-AR")+" ARG"}
+
+function render(cat="all"){
+  catalog.innerHTML="";
+  PRODUCTS.filter(p=>cat==="all"||p.category===cat).forEach(p=>{
+    let price=p.price||Object.values(p.variants)[0];
+    const card=document.createElement("div");
+    card.className="card";
+    card.innerHTML=`
+      <img src="${p.images[0]}" class="thumb">
+      <div class="meta">
+        <div class="title">${p.title}</div>
+        ${p.variants?`
+        <select>
+          ${Object.entries(p.variants).map(([k,v])=>`<option value="${v}">${k}</option>`).join("")}
+        </select>`:""}
+        <div class="price">${fmt(price)}</div>
+        <div class="actions">
+          <button class="btn buy">Comprar</button>
+          <button class="btn cart">Carrito</button>
+        </div>
+      </div>`;
+    if(p.variants){
+      const sel=card.querySelector("select");
+      const priceEl=card.querySelector(".price");
+      sel.addEventListener("change",()=>priceEl.textContent=fmt(sel.value));
+    }
+    card.querySelector(".cart").onclick=()=>{cart++;cartCount.textContent=cart};
+    catalog.appendChild(card);
+  });
+}
+
+document.querySelectorAll(".cat-nav button").forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll(".cat-nav button").forEach(x=>x.classList.remove("active"));
+    b.classList.add("active");
+    render(b.dataset.cat);
+  }
+});
+
+document.getElementById("year").textContent=new Date().getFullYear();
+render();
+</script>
+
+</body>
+</html>
