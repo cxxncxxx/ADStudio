@@ -1,161 +1,53 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AD Jewels</title>
-<meta name="description" content="AD Jewels - Chains, pulseras y dijes full ice. Joyería urbana premium." />
-<link rel="icon" type="image/jpeg" href="logojoyeria.jpg">
+<link rel="icon" href="logojoyeria.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --page:#f6f7f9;
-  --card:#fff;
-  --text:#111;
-  --accent:#000;
-  --green:#25D366;
-  font-family:'Poppins',sans-serif;
-}
-*{box-sizing:border-box}
-body{margin:0;background:var(--page);color:var(--text)}
-
-header{background:#fff;position:sticky;top:0;border-bottom:1px solid #eee;z-index:1000}
-.header-inner{max-width:1200px;margin:auto;display:flex;align-items:center;gap:12px;padding:8px 12px}
+body{margin:0;font-family:Poppins;background:#f6f7f9}
+header{background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:10}
+.header-inner{max-width:1200px;margin:auto;display:flex;gap:12px;align-items:center;padding:10px}
 .logo img{width:60px}
 .search{flex:1}
-.search input{width:100%;padding:10px;border-radius:10px;border:1px solid #ddd}
-.header-actions{font-weight:700}
+.search input{width:100%;padding:10px;border-radius:8px;border:1px solid #ddd}
+.cart-top{font-weight:700}
 
-.cat-nav{
-  max-width:1200px;
-  margin:6px auto;
-  display:flex;
-  gap:8px;
-  padding:0 12px;
-  overflow-x:auto;
-}
-.cat-nav button{
-  border:none;
-  background:#fff;
-  padding:8px 14px;
-  border-radius:999px;
-  cursor:pointer;
-  font-weight:600;
-  white-space:nowrap;
-}
+.cat-nav{max-width:1200px;margin:10px auto;display:flex;gap:10px;padding:0 10px}
+.cat-nav button{border:none;background:#fff;padding:8px 14px;border-radius:20px;font-weight:600;cursor:pointer}
 .cat-nav button.active{background:#000;color:#fff}
 
-.minimo-compra{
-  max-width:1200px;
-  margin:8px auto;
-  padding:10px;
-  background:#fff;
-  border-radius:10px;
-  font-weight:600;
-  text-align:center;
-}
+.minimo{max-width:1200px;margin:auto;background:#fff;padding:10px;border-radius:10px;text-align:center;font-weight:600}
 
-.main{max-width:1200px;margin:auto;padding:12px}
+.main{max-width:1200px;margin:auto;padding:16px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
 
-.card{background:var(--card);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.card{background:#fff;border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
 .gallery{padding:10px;background:#fafafa}
-.main-img{width:100%;height:200px;object-fit:contain;border-radius:12px}
-.thumbs{display:flex;gap:10px;margin-top:10px;justify-content:center}
-.thumbs img{
-  width:56px;height:44px;
-  object-fit:cover;border-radius:8px;
-  cursor:pointer;opacity:.6;
-  border:2px solid transparent;
-}
-.thumbs img.active{opacity:1;border-color:#000}
+.gallery img{width:100%;height:200px;object-fit:contain}
+.thumbs{display:flex;justify-content:center;gap:8px;margin-top:8px}
+.thumbs img{width:50px;height:40px;opacity:.6;border-radius:6px;cursor:pointer}
+.thumbs img.active{opacity:1;border:2px solid #000}
 
-.meta{padding:14px;display:flex;flex-direction:column;gap:10px}
-.title{font-weight:700;font-size:15px}
-.price{font-weight:800;font-size:18px}
-select{
-  padding:10px;
-  border-radius:10px;
-  border:1px solid #ddd;
-  font-size:15px;
-}
+.meta{padding:14px;display:flex;flex-direction:column;gap:8px}
+.title{font-weight:700}
+.price{font-weight:800}
+select{padding:8px;border-radius:8px;border:1px solid #ddd}
 
-.actions{margin-top:auto}
-.cart{
-  width:100%;
-  padding:12px;
-  border-radius:12px;
-  border:none;
-  font-weight:700;
-  background:#eee;
-}
+.buy{margin-top:auto;padding:12px;border:none;border-radius:10px;background:#000;color:#fff;font-weight:700;cursor:pointer}
 
-/* CHECKOUT STICKY MOBILE */
-.checkout{
-  position:sticky;
-  bottom:0;
-  background:#fff;
-  border-top:1px solid #eee;
-  padding:12px;
-  display:flex;
-  gap:10px;
-  align-items:center;
-  justify-content:space-between;
-  z-index:2000;
-}
-.checkout-total{
-  font-weight:800;
-  font-size:16px;
-}
-.whatsapp{
-  background:var(--green);
-  color:#fff;
-  border:none;
-  padding:12px 14px;
-  border-radius:12px;
-  font-weight:700;
-  display:none;
-}
-.mp{
-  background:#009ee3;
-  color:#fff;
-  border:none;
-  padding:12px 14px;
-  border-radius:12px;
-  font-weight:700;
-  display:none;
-}
+/* MODAL */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:100}
+.modal-content{background:#fff;width:95%;max-width:500px;border-radius:16px;padding:20px}
+.modal-content h3{margin-top:0}
+.modal-content input{width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ddd}
+.modal-content button{width:100%;padding:12px;border:none;border-radius:10px;background:#25D366;color:#fff;font-weight:700}
+.close{background:#eee;color:#000;margin-top:8px}
 
-/* FORM */
-.checkout-form{
-  max-width:1200px;
-  margin:20px auto;
-  padding:16px;
-  background:#fff;
-  border-radius:16px;
-}
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:12px;
-}
-.form-grid input{
-  padding:12px;
-  border-radius:10px;
-  border:1px solid #ddd;
-  font-size:15px;
-}
-
-footer{text-align:center;padding:20px;color:#666;font-size:13px}
-
-/* DESKTOP MEJORAS */
-@media(min-width:768px){
-  .logo img{width:70px}
-  .grid{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
-  .checkout{position:relative;border-top:none}
-  .form-grid{grid-template-columns:repeat(2,1fr)}
-}
+footer{text-align:center;padding:20px;color:#666}
 </style>
 </head>
 
@@ -165,58 +57,70 @@ footer{text-align:center;padding:20px;color:#666;font-size:13px}
   <div class="header-inner">
     <div class="logo"><img src="logojoyeria.jpg"></div>
     <div class="search"><input placeholder="Buscar chains, pulseras o dijes"></div>
-    <div class="header-actions">🛒 <span id="cartCount">0</span></div>
+    <div class="cart-top">🛒 <span id="cartTotal">$0</span></div>
   </div>
   <nav class="cat-nav">
-    <button data-cat="all" class="active">Todos</button>
+    <button class="active" data-cat="all">Todos</button>
     <button data-cat="chains">Chains</button>
     <button data-cat="pulseras">Pulseras</button>
     <button data-cat="dijes">Dijes</button>
   </nav>
 </header>
 
-<div class="minimo-compra">Compra mínima: <strong>$37.000 ARG</strong></div>
+<div class="minimo">Compra mínima: $37.000 ARG</div>
 
 <main class="main">
   <section id="catalog" class="grid"></section>
 </main>
 
-<div class="checkout">
-  <div class="checkout-total">Total: <span id="cartTotal">$0 ARG</span></div>
-  <button class="whatsapp" id="btnWhatsapp">WhatsApp</button>
-  <button class="mp" id="btnMP">MP</button>
+<!-- MODAL CHECKOUT -->
+<div class="modal" id="checkoutModal">
+  <div class="modal-content">
+    <h3>Datos del comprador</h3>
+    <input id="nombre" placeholder="Nombre">
+    <input id="apellido" placeholder="Apellido">
+    <input id="dni" placeholder="DNI">
+    <input id="telefono" placeholder="Teléfono">
+    <input id="email" placeholder="Email">
+    <input id="direccion" placeholder="Dirección">
+    <input id="ciudad" placeholder="Ciudad">
+    <input id="provincia" placeholder="Provincia">
+    <input id="cp" placeholder="Código Postal">
+    <button id="sendWhatsapp">Enviar pedido por WhatsApp</button>
+    <button class="close" onclick="closeModal()">Cancelar</button>
+  </div>
 </div>
 
-<div class="checkout-form">
-<h3>Datos del comprador</h3>
-<div class="form-grid">
-<input id="nombre" placeholder="Nombre">
-<input id="apellido" placeholder="Apellido">
-<input id="dni" placeholder="DNI">
-<input id="telefono" placeholder="Teléfono">
-<input id="email" placeholder="Email">
-<input id="direccion" placeholder="Dirección">
-<input id="ciudad" placeholder="Ciudad">
-<input id="provincia" placeholder="Provincia">
-<input id="cp" placeholder="Código Postal">
-</div>
-</div>
-
-<footer>© <span id="year"></span> AD Jewels</footer>
+<footer>© AD Jewels</footer>
 
 <script>
-const MIN_COMPRA=37000;
 const WHATSAPP="5492352537091";
-const MP_ALIAS="agusdente";
-const PRODUCTS=[/* TUS PRODUCTOS */];
+const MIN=37000;
+
+const PRODUCTS=[
+{
+id:"chain-silver",
+category:"chains",
+title:"Cadena Cubana Full Ice Silver",
+variants:{"40CM":37000,"45CM":36000,"50CM":38000},
+images:[
+"https://img.kwcdn.com/product/fancy/8f56a2ec-3f46-4b6a-a581-2c1175a2a5b3.jpg"
+]
+},
+{
+id:"bracelet",
+category:"pulseras",
+title:"Pulsera Cubana Full Ice Silver",
+variants:{"20CM":16000},
+images:[
+"https://img.kwcdn.com/product/fancy/b9b97bea-2c53-474e-8288-3f9c97831805.jpg"
+]
+}
+];
 
 const catalog=document.getElementById("catalog");
-const cartCount=document.getElementById("cartCount");
-const cartTotalEl=document.getElementById("cartTotal");
-const btnWhatsapp=document.getElementById("btnWhatsapp");
-const btnMP=document.getElementById("btnMP");
+let currentOrder=null;
 
-let cart=0,cartTotal=0,cartItems=[];
 const fmt=n=>"$"+n.toLocaleString("es-AR")+" ARG";
 
 function render(cat="all"){
@@ -226,45 +130,60 @@ const card=document.createElement("div");
 card.className="card";
 card.innerHTML=`
 <div class="gallery">
-<img src="${p.images[0]}" class="main-img">
-<div class="thumbs">${p.images.map((i,x)=>`<img src="${i}" class="${x==0?'active':''}">`).join("")}</div>
+<img src="${p.images[0]}">
 </div>
 <div class="meta">
 <div class="title">${p.title}</div>
 <select>${Object.entries(p.variants).map(([k,v])=>`<option value="${v}">${k}</option>`).join("")}</select>
 <div class="price">${fmt(Object.values(p.variants)[0])}</div>
-<div class="actions"><button class="cart">Agregar</button></div>
+<button class="buy">Comprar</button>
 </div>`;
-const sel=card.querySelector("select"),priceEl=card.querySelector(".price");
+const sel=card.querySelector("select");
+const priceEl=card.querySelector(".price");
 sel.onchange=()=>priceEl.textContent=fmt(sel.value);
-card.querySelector(".cart").onclick=()=>{
-const price=Number(sel.value);
-cart++;cartTotal+=price;
-cartItems.push(`${p.title} (${sel.options[sel.selectedIndex].text}) - ${fmt(price)}`);
-cartCount.textContent=cart;
-cartTotalEl.textContent=fmt(cartTotal);
-if(cartTotal>=MIN_COMPRA){btnWhatsapp.style.display="block";btnMP.style.display="block";}
+
+card.querySelector(".buy").onclick=()=>{
+if(sel.value<MIN){alert("La compra mínima es $37.000");return;}
+currentOrder={title:p.title,variant:sel.options[sel.selectedIndex].text,price:sel.value};
+openModal();
 };
 catalog.appendChild(card);
 });
 }
 
-btnWhatsapp.onclick=()=>{
-const f=[nombre,apellido,dni,telefono,email,direccion,ciudad,provincia,cp];
-if(f.some(i=>!i.value)) return alert("Completá todos los datos");
-const msg=encodeURIComponent(
-"🛒 Pedido AD Jewels\n\n"+cartItems.join("\n")+
-"\n\nTotal: "+fmt(cartTotal)
-);
-window.open(`https://wa.me/${WHATSAPP}?text=${msg}`,"_blank");
-};
-btnMP.onclick=()=>window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent("Total: "+fmt(cartTotal)+" | Alias MP: "+MP_ALIAS)}`,"_blank");
+function openModal(){document.getElementById("checkoutModal").style.display="flex"}
+function closeModal(){document.getElementById("checkoutModal").style.display="none"}
 
-document.querySelectorAll(".cat-nav button").forEach(b=>b.onclick=()=>{
+document.getElementById("sendWhatsapp").onclick=()=>{
+const f=["nombre","apellido","dni","telefono","email","direccion","ciudad","provincia","cp"];
+if(f.some(id=>!document.getElementById(id).value)) return alert("Completá todos los datos");
+
+const msg=encodeURIComponent(
+`🛒 Pedido AD Jewels
+Producto: ${currentOrder.title}
+Variante: ${currentOrder.variant}
+Precio: ${fmt(currentOrder.price)}
+
+Cliente:
+${nombre.value} ${apellido.value}
+DNI: ${dni.value}
+Tel: ${telefono.value}
+Dirección: ${direccion.value}, ${ciudad.value}, ${provincia.value}
+CP: ${cp.value}`
+);
+
+window.open(`https://wa.me/${WHATSAPP}?text=${msg}`,"_blank");
+closeModal();
+};
+
+document.querySelectorAll(".cat-nav button").forEach(b=>{
+b.onclick=()=>{
 document.querySelectorAll(".cat-nav button").forEach(x=>x.classList.remove("active"));
-b.classList.add("active");render(b.dataset.cat);
+b.classList.add("active");
+render(b.dataset.cat);
+};
 });
-document.getElementById("year").textContent=new Date().getFullYear();
+
 render();
 </script>
 
