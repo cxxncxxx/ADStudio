@@ -25,7 +25,7 @@ header{background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-inde
 .main{max-width:1200px;margin:auto;padding:16px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
 
-.card{background:#fff;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;animation:fadeUp .4s ease}
+.card{background:#fff;border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
 .gallery{padding:10px;background:#fafafa}
 .main-img{width:100%;height:200px;object-fit:contain}
 .thumbs{display:flex;justify-content:center;gap:8px;margin-top:8px}
@@ -42,26 +42,10 @@ select{padding:8px;border-radius:8px;border:1px solid #ddd}
 .buy{background:#000;color:#fff}
 .add-cart{background:#eee}
 
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(10px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-/* MODALES */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:100}
-.modal-content{background:#fff;width:95%;max-width:500px;border-radius:16px;padding:20px;animation:pop .3s ease}
-@keyframes pop{
-  from{transform:scale(.9);opacity:0}
-  to{transform:scale(1);opacity:1}
-}
-
+.modal-content{background:#fff;width:95%;max-width:500px;border-radius:16px;padding:20px}
 .cart-item{display:flex;justify-content:space-between;margin-bottom:8px}
 .remove{background:#eee;border:none;border-radius:6px;padding:4px 8px;cursor:pointer}
-
-.modal-content input{width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #ddd}
-.modal-content button{width:100%;padding:12px;border:none;border-radius:10px;font-weight:700}
-.whatsapp{background:#25D366;color:#fff}
-.close{background:#eee;margin-top:8px}
 
 footer{text-align:center;padding:20px;color:#666}
 </style>
@@ -71,7 +55,7 @@ footer{text-align:center;padding:20px;color:#666}
 
 <header>
   <div class="header-inner">
-    <div class="logo"><img src="logojoyeria.jpg"></div>
+    <div class="logo"><img src="logojoyeria.jpg" alt="AD Jewels"></div>
     <div class="search"><input placeholder="Buscar chains, pulseras o dijes"></div>
     <div class="cart-top" onclick="openCart()">🛒 <span id="cartTotal">$0</span></div>
   </div>
@@ -96,25 +80,7 @@ footer{text-align:center;padding:20px;color:#666}
     <div id="cartItems"></div>
     <strong id="cartModalTotal"></strong>
     <button class="buy" onclick="finalizarCarrito()">Finalizar carrito</button>
-    <button class="close" onclick="closeCart()">Cerrar</button>
-  </div>
-</div>
-
-<!-- CHECKOUT -->
-<div class="modal" id="checkoutModal">
-  <div class="modal-content">
-    <h3>Datos del comprador</h3>
-    <input id="nombre" placeholder="Nombre">
-    <input id="apellido" placeholder="Apellido">
-    <input id="dni" placeholder="DNI">
-    <input id="telefono" placeholder="Teléfono">
-    <input id="email" placeholder="Email">
-    <input id="direccion" placeholder="Dirección">
-    <input id="ciudad" placeholder="Ciudad">
-    <input id="provincia" placeholder="Provincia">
-    <input id="cp" placeholder="Código Postal">
-    <button class="whatsapp" onclick="sendWhatsapp()">Enviar pedido por WhatsApp</button>
-    <button class="close" onclick="closeCheckout()">Cancelar</button>
+    <button class="add-cart" onclick="closeCart()">Cerrar</button>
   </div>
 </div>
 
@@ -127,6 +93,73 @@ const cart=[];
 let cartTotal=0;
 
 const fmt=n=>"$"+Number(n).toLocaleString("es-AR")+" ARG";
+
+/* ===== PRODUCTOS COMPLETOS ===== */
+const PRODUCTS=[
+{
+  id:"chain-silver",
+  category:"chains",
+  title:"Cadena Cubana Full Ice Silver",
+  variants:{
+    "40 CM":37000,"45 CM":36000,"50 CM":38000,"55 CM":40600,"60 CM":46000
+  },
+  images:[
+    "https://img.kwcdn.com/product/fancy/8f56a2ec-3f46-4b6a-a581-2c1175a2a5b3.jpg",
+    "https://img.kwcdn.com/product/fancy/94d928f3-2c5e-428e-a41a-669d1d5fdafa.jpg"
+  ]
+},
+{
+  id:"chain-gold",
+  category:"chains",
+  title:"Cadena Cubana Full Ice Gold",
+  variants:{
+    "40 CM":37000,"45 CM":36000,"50 CM":38000,"55 CM":40600,"60 CM":46000
+  },
+  images:[
+    "https://img.kwcdn.com/product/fancy/b40c0527-fdf1-4871-a299-df4015b7019f.jpg",
+    "https://img.kwcdn.com/product/fancy/5c644b12-0440-4d63-947d-43b4d046d348.jpg",
+    "https://img.kwcdn.com/product/fancy/515eb5d2-25e6-4a5e-878b-8f884f819595.jpg"
+  ]
+},
+{
+  id:"bracelet",
+  category:"pulseras",
+  title:"Pulsera Cubana Full Ice Silver",
+  variants:{ "20 CM":16000 },
+  images:[
+    "https://img.kwcdn.com/product/fancy/b9b97bea-2c53-474e-8288-3f9c97831805.jpg",
+    "https://img.kwcdn.com/product/fancy/01a4f3a9-8c74-4a5a-9705-19a9d11fd5c8.jpg"
+  ]
+},
+{
+  id:"dije-type1",
+  category:"dijes",
+  title:"Dije Personalizado Full Ice – Type 1",
+  variants:{
+    "1 Letra":36000,"2 Letras":60000,"3 Letras":80000,"4 Letras":120000,
+    "5 Letras":130000,"6 Letras":155000,"7 Letras":170000,
+    "8 Letras":190000,"9 Letras":210000
+  },
+  images:[
+    "https://img.kwcdn.com/product/fancy/1ab5d43a-0c48-4af9-95be-b6abadc5d97d.jpg",
+    "https://img.kwcdn.com/product/fancy/3de1e21d-e5a7-4b3d-9268-9a9001393e66.jpg"
+  ]
+},
+{
+  id:"dije-type2",
+  category:"dijes",
+  title:"Dije Personalizado Full Ice – Type 2",
+  variants:{
+    "1 Letra":40000,"2 Letras":66000,"3 Letras":90000,"4 Letras":120000,
+    "5 Letras":140000,"6 Letras":165000,"7 Letras":175000,
+    "8 Letras":188000,"9 Letras":200000
+  },
+  images:[
+    "https://img.kwcdn.com/product/fancy/786128c6-0e27-4fa1-962f-7970d604ab50.jpg",
+    "https://img.kwcdn.com/product/fancy/be273dbd-effc-48a8-977f-51dcbf73c46a.jpg"
+  ]
+}
+];
 
 const catalog=document.getElementById("catalog");
 
@@ -145,7 +178,9 @@ function render(cat="all"){
       </div>
       <div class="meta">
         <div class="title">${p.title}</div>
-        <select>${Object.entries(p.variants).map(([k,v])=>`<option value="${v}">${k}</option>`).join("")}</select>
+        <select>
+          ${Object.entries(p.variants).map(([k,v])=>`<option value="${v}">${k}</option>`).join("")}
+        </select>
         <div class="price">${fmt(firstPrice)}</div>
         <div class="actions">
           <button class="add-cart">Agregar</button>
@@ -156,7 +191,11 @@ function render(cat="all"){
 
     const mainImg=card.querySelector(".main-img");
     card.querySelectorAll(".thumbs img").forEach(t=>{
-      t.onclick=()=>{mainImg.src=t.src}
+      t.onclick=()=>{
+        card.querySelectorAll(".thumbs img").forEach(x=>x.classList.remove("active"));
+        t.classList.add("active");
+        mainImg.src=t.src;
+      };
     });
 
     const sel=card.querySelector("select");
@@ -172,11 +211,10 @@ function render(cat="all"){
     card.querySelector(".buy").onclick=()=>{
       if(Number(sel.value)<MIN){alert("La compra mínima es $37.000 ARG");return;}
       cart.length=0;
-      cartTotal=0;
-      cart.push({title:p.title,variant:sel.options[sel.selectedIndex].text,price:sel.value});
       cartTotal=Number(sel.value);
+      cart.push({title:p.title,variant:sel.options[sel.selectedIndex].text,price:sel.value});
       updateCartUI();
-      finalizarCarrito();
+      openCart();
     };
 
     catalog.appendChild(card);
@@ -211,19 +249,23 @@ function removeItem(i){
 
 function finalizarCarrito(){
   if(cartTotal<MIN){alert("La compra mínima es $37.000 ARG");return;}
-  closeCart();
-  checkoutModal.style.display="flex";
-}
-function closeCheckout(){checkoutModal.style.display="none"}
-
-function sendWhatsapp(){
   const msg=encodeURIComponent(
-`🛒 Pedido AD Jewels
-${cart.map(p=>`• ${p.title} (${p.variant}) - ${fmt(p.price)}`).join("\n")}
-Total: ${fmt(cartTotal)}`
+    `🛒 Pedido AD Jewels\n`+
+    cart.map(p=>`• ${p.title} (${p.variant}) - ${fmt(p.price)}`).join("\n")+
+    `\nTotal: ${fmt(cartTotal)}`
   );
   window.open(`https://wa.me/${WHATSAPP}?text=${msg}`,"_blank");
 }
+
+document.querySelectorAll(".cat-nav button").forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll(".cat-nav button").forEach(x=>x.classList.remove("active"));
+    b.classList.add("active");
+    render(b.dataset.cat);
+  };
+});
+
+render();
 </script>
 
 </body>
