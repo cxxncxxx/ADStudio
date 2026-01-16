@@ -203,10 +203,15 @@ function render(cat="all"){
     sel.onchange=()=>priceEl.textContent=fmt(sel.value);
 
     card.querySelector(".add-cart").onclick=()=>{
-      cart.push({title:p.title,variant:sel.options[sel.selectedIndex].text,price:sel.value});
-      cartTotal+=Number(sel.value);
-      updateCartUI();
-    };
+  cart.push({
+    title: p.title,
+    variant: sel.options[sel.selectedIndex].text,
+    price: sel.value,
+    image: p.images[0] // 👈 CLAVE
+  });
+  cartTotal += Number(sel.value);
+  updateCartUI();
+};
 
    card.querySelector(".buy").onclick=()=>{
   if(Number(sel.value)<MIN){
