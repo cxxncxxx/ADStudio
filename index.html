@@ -167,6 +167,16 @@ footer{text-align:center;padding:20px;color:#666}
   }
 }
 
+  /* ===== ZOOM TIPO LUPA EN IMAGEN DEL MODAL ===== */
+#productModal .gallery{
+  overflow: hidden;
+}
+
+#productModal .main-img{
+  transition: transform 0.2s ease;
+  cursor: zoom-in;
+}
+
 </style>
 </head>
 
@@ -752,6 +762,22 @@ window.onload = () => {
   render();
 };
 
+const pmMain = document.getElementById("pm-main");
+
+pmMain.addEventListener("mousemove", (e) => {
+  const rect = pmMain.getBoundingClientRect();
+  const x = ((e.clientX - rect.left) / rect.width) * 100;
+  const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+  pmMain.style.transformOrigin = `${x}% ${y}%`;
+  pmMain.style.transform = "scale(1.8)";
+});
+
+pmMain.addEventListener("mouseleave", () => {
+  pmMain.style.transform = "scale(1)";
+  pmMain.style.transformOrigin = "center center";
+});
+  
 </script>
   
 </body>
