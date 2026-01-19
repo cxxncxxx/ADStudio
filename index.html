@@ -472,7 +472,10 @@ function closeProduct(){
   document.getElementById("productModal").style.display = "none";
 }
   
-render();
+window.onload = () => {
+  render();
+};
+
 </script>
   
 </body>
