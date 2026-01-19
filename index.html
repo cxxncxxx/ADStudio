@@ -605,18 +605,6 @@ function validarDijeEnCarrito(){
     p.title.toLowerCase().includes("pulsera")
   );
 
-  if(tieneNoDije && !tieneDije){
-    alert(
-      "⚠️ Para comprar cadenas o pulseras es obligatorio agregar al menos un dije.\n\n" +
-      "Esto se debe a los tiempos de envío y personalización.\n\n" +
-      "👉 Agregá un dije a tu carrito para continuar."
-    );
-    return false;
-  }
-
-  return true;
-}
-
 window.onload = () => {
   render();
 };
