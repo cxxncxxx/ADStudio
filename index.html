@@ -62,7 +62,21 @@ footer{text-align:center;padding:20px;color:#666}
   overflow-y:auto;
 }
 
+/* ===== FIX MODAL PRODUCTO MOBILE ===== */
+#productModal .modal-content{
+  max-height:90vh;
+  overflow-y:auto;
+}
 
+@media (max-width: 600px){
+  #productModal .actions{
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    padding-top: 10px;
+  }
+}
+  
 </style>
 </head>
 
