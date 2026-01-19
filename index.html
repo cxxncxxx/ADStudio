@@ -12,6 +12,25 @@ body{margin:0;font-family:Poppins;background:#f6f7f9}
 header{background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:10}
 .header-inner{max-width:1200px;margin:auto;display:flex;gap:12px;align-items:center;padding:10px}
 .logo img{width:60px}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.verified{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  background:#1d9bf0; /* azul verificado */
+  color:#fff;
+  font-size:12px;
+  font-weight:900;
+}
+
 .search{flex:1}
 .search input{width:100%;padding:10px;border-radius:8px;border:1px solid #ddd}
 .cart-top{
@@ -145,7 +164,11 @@ footer{text-align:center;padding:20px;color:#666}
 
 <header>
   <div class="header-inner">
-    <div class="logo"><img src="logojoyeria.jpg" alt="AD Jewels"></div>
+    <div class="logo">
+  <img src="logojoyeria.jpg" alt="AD Jewels">
+  <span class="verified">✔️</span>
+</div>
+
     <div class="search"><input placeholder="Buscar chains, pulseras o dijes"></div>
     <div class="cart-top" onclick="openCart()">🛒 <span id="cartTotal">$0</span></div>
   </div>
