@@ -460,7 +460,16 @@ function removeItem(i){
 }
 
 function finalizarCarrito(){
-  if(cartTotal<MIN){alert("La compra mínima es $65.000 ARG");return;}
+
+  if(!validarDijeEnCarrito()) return;
+
+  if(cartTotal < MIN){
+    alert("La compra mínima es $65.000 ARG");
+    return;
+  }
+
+  ...
+}
   const msg=encodeURIComponent(
     `🛒 Pedido AD Jewels\n`+
     cart.map(p=>`• ${p.title} (${p.variant}) - ${fmt(p.price)}`).join("\n")+
@@ -533,22 +542,38 @@ function openProduct(p){
   };
 
   document.getElementById("pm-buy").onclick = ()=>{
-    if(Number(variants.value)<MIN){
-      alert("La compra mínima es $65.000 ARG");
+
+  const esDije = p.category === "dijes";
+
+  if(!esDije){
+    const tieneDije = cart.some(item => item.category === "dijes");
+
+    if(!tieneDije){
+      alert("Para comprar cadenas o pulseras es obligatorio agregar un dije al carrito por tiempos de envío.");
       return;
     }
-    cart.length = 0;
-    cartTotal = Number(variants.value);
-    cart.push({
-      title:p.title,
-      variant:variants.options[variants.selectedIndex].text,
-      price:variants.value,
-      image:p.images[0]
-    });
-    updateCartUI();
-    openCart();
-    closeProduct();
-  };
+  }
+
+  if(Number(variants.value) < MIN){
+    alert("La compra mínima es $65.000 ARG");
+    return;
+  }
+
+  cart.length = 0;
+  cartTotal = Number(variants.value);
+
+  cart.push({
+    title:p.title,
+    category:p.category,
+    variant:variants.options[variants.selectedIndex].text,
+    price:variants.value,
+    image:p.images[0]
+  });
+
+  updateCartUI();
+  openCart();
+  closeProduct();
+};
 
   modal.style.display = "flex";
 }
@@ -556,7 +581,26 @@ function openProduct(p){
 function closeProduct(){
   document.getElementById("productModal").style.display = "none";
 }
-  
+
+function validarDijeEnCarrito(){
+  const tieneDije = cart.some(p => p.title.toLowerCase().includes("dije"));
+  const tieneNoDije = cart.some(p =>
+    p.title.toLowerCase().includes("cadena") ||
+    p.title.toLowerCase().includes("pulsera")
+  );
+
+  if(tieneNoDije && !tieneDije){
+    alert(
+      "⚠️ Para comprar cadenas o pulseras es obligatorio agregar al menos un dije.\n\n" +
+      "Esto se debe a los tiempos de envío y personalización.\n\n" +
+      "👉 Agregá un dije a tu carrito para continuar."
+    );
+    return false;
+  }
+
+  return true;
+}
+
 window.onload = () => {
   render();
 };
