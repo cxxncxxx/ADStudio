@@ -468,8 +468,6 @@ function finalizarCarrito(){
     return;
   }
 
-  ...
-}
   const msg=encodeURIComponent(
     `🛒 Pedido AD Jewels\n`+
     cart.map(p=>`• ${p.title} (${p.variant}) - ${fmt(p.price)}`).join("\n")+
