@@ -282,7 +282,7 @@ Una cadena pensada para quienes no siguen la moda, la imponen.`,
   },
   images:[
     "https://acdn-us.mitiendanube.com/stores/002/007/158/products/b4868e04-88fd-433b-9f88-ef858bf24279-83776b35765131267c17119465263541-1024-1024.webp",
-    "https://acdn-us.mitiendanube.com/stores/002/007/158/products/hb3fce50252ea45f083cda57b2d57aa93n1-29f7625e4f87f5f4a216426111928273-1024-1024.webp",
+    "https://acdn-us.mitiendanube.com/stores/002/007/158/products/hb3fce50252ea45f083cda57b2d57aa93n1-29f7625e4f87f5f4a216426111928273-1024-1024.webp"
   ]
 },
 {
@@ -599,11 +599,8 @@ function closeProduct(){
 }
 
 function validarDijeEnCarrito(){
-  const tieneDije = cart.some(p => p.title.toLowerCase().includes("dije"));
-  const tieneNoDije = cart.some(p =>
-    p.title.toLowerCase().includes("cadena") ||
-    p.title.toLowerCase().includes("pulsera")
-  );
+  return true;
+}
 
 window.onload = () => {
   render();
