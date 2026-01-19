@@ -76,7 +76,52 @@ footer{text-align:center;padding:20px;color:#666}
     padding-top: 10px;
   }
 }
-  
+
+/* ===== AJUSTE MODAL PRODUCTO MOBILE ===== */
+@media (max-width: 600px){
+
+  #productModal .modal-content{
+    max-height: 85vh;        /* más chico */
+    padding: 14px;          /* menos aire */
+  }
+
+  #productModal .main-img{
+    height: 160px;          /* imagen más baja */
+  }
+
+  #productModal .thumbs img{
+    width: 42px;
+    height: 34px;
+  }
+
+  #productModal h3{
+    font-size: 18px;
+  }
+
+  #productModal .price{
+    font-size: 16px;
+  }
+
+  #productModal .desc{
+    font-size: 13px;        /* descripción más chica */
+    line-height: 1.45;
+  }
+
+  #productModal .actions{
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    padding: 8px 0;
+    gap: 10px;
+  }
+
+  #productModal .buy,
+  #productModal .add-cart{
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
 </style>
 </head>
 
