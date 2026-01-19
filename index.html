@@ -47,7 +47,18 @@ select{padding:8px;border-radius:8px;border:1px solid #ddd}
 .buy{background:#000;color:#fff}
 .add-cart{background:#eee}
 
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:100}
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:100;
+}
+
 .modal-content{background:#fff;width:95%;max-width:500px;border-radius:16px;padding:20px}
 .cart-item{display:flex;justify-content:space-between;margin-bottom:8px}
 .remove{background:#eee;border:none;border-radius:6px;padding:4px 8px;cursor:pointer}
@@ -77,42 +88,47 @@ footer{text-align:center;padding:20px;color:#666}
   }
 }
 
-/* ===== AJUSTE MODAL PRODUCTO MOBILE ===== */
 @media (max-width: 600px){
 
   #productModal .modal-content{
-    max-height: 85vh;        /* más chico */
-    padding: 14px;          /* menos aire */
+    max-height: 78vh;          /* más chico aún */
+    padding: 12px;
+    border-radius: 18px;
   }
 
   #productModal .main-img{
-    height: 160px;          /* imagen más baja */
+    height: 140px;             /* imagen más baja */
+  }
+
+  #productModal .thumbs{
+    margin-top: 6px;
   }
 
   #productModal .thumbs img{
-    width: 42px;
-    height: 34px;
+    width: 40px;
+    height: 32px;
   }
 
   #productModal h3{
-    font-size: 18px;
+    font-size: 17px;
   }
 
   #productModal .price{
-    font-size: 16px;
+    font-size: 15px;
   }
 
   #productModal .desc{
-    font-size: 13px;        /* descripción más chica */
+    font-size: 13px;
     line-height: 1.45;
+    max-height: 120px;         /* evita que se coma todo */
+    overflow-y: auto;
   }
 
   #productModal .actions{
     position: sticky;
     bottom: 0;
     background: #fff;
-    padding: 8px 0;
-    gap: 10px;
+    padding-top: 8px;
   }
 
   #productModal .buy,
