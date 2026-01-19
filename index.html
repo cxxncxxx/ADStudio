@@ -573,10 +573,6 @@ function openProduct(p){
   if(!esDije){
     const tieneDije = cart.some(item => item.category === "dijes");
 
-    if(!tieneDije){
-      alert("Para comprar cadenas o pulseras es obligatorio agregar un dije al carrito por tiempos de envío.");
-      return;
-    }
   }
 
   cart.length = 0;
