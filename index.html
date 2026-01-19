@@ -89,6 +89,32 @@ footer{text-align:center;padding:20px;color:#666}
   </div>
 </div>
 
+<!-- PRODUCTO DETALLE -->
+<div class="modal" id="productModal">
+  <div class="modal-content">
+
+    <div class="gallery">
+      <img id="pm-main" class="main-img">
+      <div class="thumbs" id="pm-thumbs"></div>
+    </div>
+
+    <h3 id="pm-title"></h3>
+    <p class="price" id="pm-price"></p>
+
+    <select id="pm-variants"></select>
+
+    <p class="desc" id="pm-desc"></p>
+
+    <div class="actions">
+      <button class="add-cart" id="pm-add">Agregar al carrito</button>
+      <button class="buy" id="pm-buy">Comprar</button>
+    </div>
+
+    <button class="remove" onclick="closeProduct()">Cerrar</button>
+
+  </div>
+</div>
+
 <footer>© 2026 - Todos Los Derechos Reservados - AD Jewels</footer>
 
 <script>
@@ -105,6 +131,21 @@ const PRODUCTS=[
   id:"chain-silver",
   category:"chains",
   title:"Cadena Cubana Full Ice Silver",
+  desc:"Elevá tu estilo con la Cadena Cubana Full Ice Silver, una pieza imponente diseñada para quienes buscan destacar con elegancia y presencia. Su clásico tejido cubano está completamente cubierto de piedras brillantes que reflejan la luz desde todos los ángulos, logrando un efecto visual impactante y sofisticado.
+Ideal tanto para looks urbanos como para ocasiones especiales, esta cadena combina lujo, tendencia y personalidad, convirtiéndose en el accesorio perfecto para marcar diferencia. Su terminación premium y brillo intenso la hacen protagonista en cualquier outfit.
+✨ Disponible en múltiples medidas para adaptarse a tu estilo:
+40 cm
+45 cm
+50 cm
+55 cm
+60 cm
+
+💎 Por qué elegirla:
+Diseño cubano clásico con acabado Full Ice
+Brillo premium que no pasa desapercibido
+Estilo moderno, llamativo y versátil
+Ideal para uso diario o eventos especiales
+Una cadena pensada para quienes no siguen la moda, la imponen.",
   variants:{
     "40 CM":37000,"45 CM":36000,"50 CM":38000,"55 CM":40600,"60 CM":46000
   },
@@ -117,6 +158,21 @@ const PRODUCTS=[
   id:"chain-gold",
   category:"chains",
   title:"Cadena Cubana Full Ice Gold",
+  desc:"Elevá tu estilo con la Cadena Cubana Full Ice Gold, una pieza imponente diseñada para quienes buscan destacar con elegancia y presencia. Su clásico tejido cubano está completamente cubierto de piedras brillantes que reflejan la luz desde todos los ángulos, logrando un efecto visual impactante y sofisticado.
+Ideal tanto para looks urbanos como para ocasiones especiales, esta cadena combina lujo, tendencia y personalidad, convirtiéndose en el accesorio perfecto para marcar diferencia. Su terminación premium y brillo intenso la hacen protagonista en cualquier outfit.
+✨ Disponible en múltiples medidas para adaptarse a tu estilo:
+40 cm
+45 cm
+50 cm
+55 cm
+60 cm
+
+💎 Por qué elegirla:
+Diseño cubano clásico con acabado Full Ice
+Brillo premium que no pasa desapercibido
+Estilo moderno, llamativo y versátil
+Ideal para uso diario o eventos especiales
+Una cadena pensada para quienes no siguen la moda, la imponen.",
   variants:{
     "40 CM":37000,"45 CM":36000,"50 CM":38000,"55 CM":40600,"60 CM":46000
   },
@@ -130,6 +186,16 @@ const PRODUCTS=[
   id:"bracelet",
   category:"pulseras",
   title:"Pulsera Cubana Full Ice Silver",
+  desc:"Elevá tu estilo con la Pulsera Cubana Full Ice Silver, una pieza imponente diseñada para quienes buscan destacar con elegancia y presencia. Su clásico tejido cubano en tono plateado está completamente cubierto de piedras brillantes que capturan la luz desde todos los ángulos, logrando un efecto visual impactante y sofisticado.
+Ideal tanto para looks urbanos como para ocasiones especiales, esta pulsera combina lujo, tendencia y personalidad, convirtiéndose en el accesorio perfecto para marcar diferencia. Su terminación premium y brillo intenso la hacen protagonista en cualquier outfit.
+✨ Disponible en la medida ideal para un ajuste cómodo y seguro:
+20 cm
+💎 Por qué elegirla:
+Diseño cubano clásico con acabado Full Ice Silver
+Brillo premium que no pasa desapercibido
+Estilo moderno, llamativo y versátil
+Ideal para uso diario o eventos especiales
+Una pulsera pensada para quienes no siguen la moda, la imponen.",
   variants:{ "20 CM":22000 },
   images:[
     "https://img.kwcdn.com/product/fancy/b9b97bea-2c53-474e-8288-3f9c97831805.jpg",
@@ -140,6 +206,19 @@ const PRODUCTS=[
   id:"dije-type1",
   category:"dijes",
   title:"Dije Personalizado Full Ice – Type 1",
+  desc:"Elevá tu estilo con el Dije Personalizado Full Ice Type 1, una pieza única diseñada para quienes buscan destacar con elegancia y personalidad. Podés elegir tu nombre, iniciales o palabra favorita, totalmente personalizable de 1 a 9 letras, con acabado Full Ice en Silver o Gold, logrando un brillo impactante y sofisticado.
+Ideal tanto para looks urbanos como para ocasiones especiales, este dije combina lujo, tendencia y exclusividad, convirtiéndose en el accesorio perfecto para marcar diferencia. Cada pieza es elaborada con materiales delicados y de muy alta calidad, asegurando un resultado premium.
+✨ Disponible en colores y personalización:
+Silver
+Gold
+De 1 a 9 letras
+💎 Por qué elegirlo:
+Diseño Full Ice personalizado, único y exclusivo
+Brillo premium que no pasa desapercibido
+Estilo moderno, llamativo y versátil
+Ideal para uso diario o como regalo especial
+El envío del dije puede tardar entre 3 semanas y 1 mes y medio debido a la elaboración cuidadosa y el uso de materiales super delicados de alta calidad
+Una pieza pensada para quienes no siguen la moda, la imponen.",
   variants:{
     "1 Letra":37000,"2 Letras":60000,"3 Letras":80000,"4 Letras":120000,
     "5 Letras":130000,"6 Letras":155000,"7 Letras":170000,
@@ -154,6 +233,18 @@ const PRODUCTS=[
   id:"dije-type2",
   category:"dijes",
   title:"Dije Personalizado Full Ice – Type 2",
+  desc:"Elevá tu estilo con el Dije Personalizado Full Ice Type 2, una pieza única diseñada para quienes buscan destacar con elegancia y personalidad. Podés elegir tu nombre, iniciales o palabra favorita, totalmente personalizable, con acabado Full Ice en Silver o Gold, logrando un brillo impactante y sofisticado.
+Ideal tanto para looks urbanos como para ocasiones especiales, este dije combina lujo, tendencia y exclusividad, convirtiéndose en el accesorio perfecto para marcar diferencia. Cada pieza es elaborada con materiales delicados y de muy alta calidad, asegurando un resultado premium.
+✨ Disponible en colores:
+Silver
+Gold
+💎 Por qué elegirlo:
+Diseño Full Ice Type 2 personalizado, único y exclusivo
+Brillo premium que no pasa desapercibido
+Estilo moderno, llamativo y versátil
+Ideal para uso diario o como regalo especial
+El envío del dije puede tardar entre 3 semanas y 1 mes y medio debido a la elaboración cuidadosa y el uso de materiales super delicados de alta calidad
+Una pieza pensada para quienes no siguen la moda, la imponen.",
   variants:{
     "1 Letra":40000,"2 Letras":66000,"3 Letras":90000,"4 Letras":120000,
     "5 Letras":140000,"6 Letras":165000,"7 Letras":175000,
@@ -195,6 +286,7 @@ function render(cat="all"){
     `;
 
     const mainImg=card.querySelector(".main-img");
+    mainImg.onclick = ()=>openProduct(p);
     card.querySelectorAll(".thumbs img").forEach(t=>{
       t.onclick=()=>{
         card.querySelectorAll(".thumbs img").forEach(x=>x.classList.remove("active"));
@@ -218,27 +310,29 @@ function render(cat="all"){
   updateCartUI();
 };
 
-   card.querySelector(".buy").onclick=()=>{
-  if(Number(sel.value)<MIN){
+   card.querySelector(".buy").onclick = ()=>{
+  const price = Number(sel.value);
+
+  if(price < MIN){
     alert("La compra mínima es $65.000 ARG");
     return;
   }
 
   cart.length = 0;
-  cartTotal = Number(sel.value);
+  cartTotal = price;
 
   cart.push({
     title: p.title,
     variant: sel.options[sel.selectedIndex].text,
-    price: sel.value,
-    image: p.images[0] // 👈 ESTA ES LA CLAVE
+    price: price,
+    image: p.images[0]
   });
 
   updateCartUI();
   openCart();
 };
     
-    catalog.appendChild(card);
+catalog.appendChild(card);
   });
 }
 
@@ -281,7 +375,7 @@ function removeItem(i){
 }
 
 function finalizarCarrito(){
-  if(cartTotal<MIN){alert("La compra mínima es $37.000 ARG");return;}
+  if(cartTotal<MIN){alert("La compra mínima es $65.000 ARG");return;}
   const msg=encodeURIComponent(
     `🛒 Pedido AD Jewels\n`+
     cart.map(p=>`• ${p.title} (${p.variant}) - ${fmt(p.price)}`).join("\n")+
@@ -298,8 +392,88 @@ document.querySelectorAll(".cat-nav button").forEach(b=>{
   };
 });
 
+function openProduct(p){
+  const modal = document.getElementById("productModal");
+  const main = document.getElementById("pm-main");
+  const thumbs = document.getElementById("pm-thumbs");
+  const title = document.getElementById("pm-title");
+  const price = document.getElementById("pm-price");
+  const variants = document.getElementById("pm-variants");
+  const desc = document.getElementById("pm-desc");
+
+  // Reset
+  thumbs.innerHTML = "";
+  variants.innerHTML = "";
+
+  // Data
+  title.textContent = p.title;
+  desc.textContent = p.desc;
+  main.src = p.images[0];
+
+  // Images
+  p.images.forEach((img,i)=>{
+    const t = document.createElement("img");
+    t.src = img;
+    if(i===0) t.classList.add("active");
+    t.onclick = ()=>{
+      main.src = img;
+      thumbs.querySelectorAll("img").forEach(x=>x.classList.remove("active"));
+      t.classList.add("active");
+    };
+    thumbs.appendChild(t);
+  });
+
+  // Variants
+  Object.entries(p.variants).forEach(([k,v],i)=>{
+    const o = document.createElement("option");
+    o.value = v;
+    o.textContent = k;
+    variants.appendChild(o);
+    if(i===0) price.textContent = fmt(v);
+  });
+
+  variants.onchange = ()=>price.textContent = fmt(variants.value);
+
+  // Buttons
+  document.getElementById("pm-add").onclick = ()=>{
+    cart.push({
+      title:p.title,
+      variant:variants.options[variants.selectedIndex].text,
+      price:variants.value,
+      image:p.images[0]
+    });
+    cartTotal += Number(variants.value);
+    updateCartUI();
+    closeProduct();
+  };
+
+  document.getElementById("pm-buy").onclick = ()=>{
+    if(Number(variants.value)<MIN){
+      alert("La compra mínima es $65.000 ARG");
+      return;
+    }
+    cart.length = 0;
+    cartTotal = Number(variants.value);
+    cart.push({
+      title:p.title,
+      variant:variants.options[variants.selectedIndex].text,
+      price:variants.value,
+      image:p.images[0]
+    });
+    updateCartUI();
+    openCart();
+    closeProduct();
+  };
+
+  modal.style.display = "flex";
+}
+
+function closeProduct(){
+  document.getElementById("productModal").style.display = "none";
+}
+  
 render();
 </script>
-
+  
 </body>
 </html>
