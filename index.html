@@ -2,7 +2,18 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <style>
+  html, body {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+</style>
+
 <title>AD Studio</title>
 <link rel="icon" href="logoadstudio.png">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -46,7 +57,24 @@ header{background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-inde
   white-space:nowrap;
 }
 
-.cat-nav{max-width:1200px;margin:10px auto;display:flex;gap:10px;padding:0 10px}
+.cat-nav{
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+
+.cat-nav::-webkit-scrollbar{
+  display: none;
+}
+
+.cat-nav button{
+  flex: 0 0 auto;
+}
+
 .cat-nav button{border:none;background:#fff;padding:8px 14px;border-radius:20px;font-weight:600;cursor:pointer}
 .cat-nav button.active{background:#000;color:#fff}
 
@@ -181,6 +209,50 @@ footer{text-align:center;padding:20px;color:#666}
   cursor: zoom-in;
 }
 
+  @media (max-width: 768px){
+  .header-inner,
+  .main,
+  .minimo{
+    max-width: 100%;
+    margin: 0;
+  }
+}
+
+  img, video{
+  max-width: 100%;
+  height: auto;
+}
+
+  .cat-nav {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+
+.cat-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.cat-nav button {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 768px){
+  .header-inner,
+  .main,
+  .minimo{
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+  
 </style>
 </head>
 
