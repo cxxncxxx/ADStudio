@@ -375,6 +375,7 @@ const PRODUCTS=[
   id:"jordan-retro-4-military-black",
   category:"calzados",
   title:"Jordan 4 Retro Military Black",
+  promo: "2x1",
   variants:{
    
   "34":140000,
@@ -401,6 +402,7 @@ const PRODUCTS=[
   id:"jordan-retro-4-white-oreo",
   category:"calzados",
   title:"Jordan Retro 4 White Oreo",
+  promo: "2x1",
   variants:{
    
   "34":140000,
@@ -427,6 +429,7 @@ const PRODUCTS=[
   id:"adidas-forum-low-black-and-white",
   category:"calzados",
   title:"Adidas Forum Low Black and White",
+  promo: "2x1",
   variants:{
    
   "34":140000,
@@ -453,6 +456,7 @@ const PRODUCTS=[
   id:"adidas-forum-high-blue",
   category:"calzados",
   title:"Adidas Forum High Blue",
+  promo: "2x1",
   variants:{
    
   "34":140000,
@@ -998,25 +1002,28 @@ function render(cat="all"){
     const firstPrice=Object.values(p.variants)[0];
     const card=document.createElement("div");
     card.className="card";
-    card.innerHTML=`
-      <div class="gallery">
-        <img src="${p.images[0]}" class="main-img">
-        <div class="thumbs">
-          ${p.images.map((img,i)=>`<img src="${img}" class="${i===0?"active":""}">`).join("")}
-        </div>
-      </div>
-      <div class="meta">
-        <div class="title">${p.title}</div>
-        <select>
-          ${Object.entries(p.variants).map(([k,v])=>`<option value="${v}">${k}</option>`).join("")}
-        </select>
-        <div class="price">${fmt(firstPrice)}</div>
-        <div class="actions">
-          <button class="add-cart">Agregar</button>
-          <button class="buy">Comprar</button>
-        </div>
-      </div>
-    `;
+    card.innerHTML = `
+  ${p.promo === "2x1" ? `<span class="badge-2x1">2x1</span>` : ""}
+
+  <div class="gallery">
+    <img src="${p.images[0]}" class="main-img">
+    <div class="thumbs">
+      ${p.images.map((img,i)=>`<img src="${img}" class="${i===0?"active":""}">`).join("")}
+    </div>
+  </div>
+
+  <div class="meta">
+    <div class="title">${p.title}</div>
+    <select>
+      ${Object.entries(p.variants).map(([k,v])=>`<option value="${v}">${k}</option>`).join("")}
+    </select>
+    <div class="price">${fmt(firstPrice)}</div>
+    <div class="actions">
+      <button class="add-cart">Agregar</button>
+      <button class="buy">Comprar</button>
+    </div>
+  </div>
+`;
 
     const mainImg=card.querySelector(".main-img");
     mainImg.onclick = ()=>openProduct(p);
