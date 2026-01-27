@@ -1260,49 +1260,48 @@ window.onload = () => {
 };
 
 let startX = 0;
-let isDragging = false;
-currentIndex = 0
+let isSwiping = false;
+let currentIndex = 0;
 
-document.addEventListener("touchstart", e => {
-  const slider = e.target.closest(".main-slider");
-  if (!slider) return;
+const slider = document.querySelector(".main-slider");
 
-  startX = e.touches[0].clientX;
-  isDragging = true;
-});
+if (slider) {
+  slider.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+    isSwiping = true;
+  }, { passive: true });
 
-document.addEventListener("touchend", e => {
-  if (!isDragging) return;
+  slider.addEventListener("touchend", e => {
+    if (!isSwiping) return;
 
-  const slider = e.target.closest(".main-slider");
-  if (!slider) return;
+    const endX = e.changedTouches[0].clientX;
+    const diff = startX - endX;
 
-  const track = slider.querySelector(".main-track");
-  const imgs = track.querySelectorAll("img");
+    if (Math.abs(diff) < 40) {
+      isSwiping = false;
+      return;
+    }
 
-  const endX = e.changedTouches[0].clientX;
-  const diff = startX - endX;
+    const track = slider.querySelector(".main-track");
+    const imgs = track.querySelectorAll("img");
 
-  if (Math.abs(diff) < 50) {
-    isDragging = false;
-    return;
-  }
+    if (diff > 0 && currentIndex < imgs.length - 1) currentIndex++;
+    if (diff < 0 && currentIndex > 0) currentIndex--;
 
-  if (diff > 0 && currentIndex < imgs.length - 1) currentIndex++;
-  if (diff < 0 && currentIndex > 0) currentIndex--;
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-  track.style.transform = `translateX(-${currentIndex * 100}%)`;
-  isDragging = false;
+    // sincronizar thumbs
+    const thumbs = document.getElementById("pm-thumbs");
+    if (thumbs) {
+      thumbs.querySelectorAll("img").forEach((t, i) => {
+        t.classList.toggle("active", i === currentIndex);
+      });
+    }
 
-  // sincronizar thumbs
-  const thumbs = document.getElementById("pm-thumbs");
-  if (thumbs) {
-    thumbs.querySelectorAll("img").forEach((t, i) => {
-      t.classList.toggle("active", i === currentIndex);
-    });
-  }
-});
-  
+    isSwiping = false;
+  }, { passive: true });
+}
+
 </script>
 
 </body>
