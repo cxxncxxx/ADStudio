@@ -1263,7 +1263,12 @@ let startX = 0;
 let isSwiping = false;
 let currentIndex = 0;
 
-const slider = document.querySelector(".main-slider");
+const modal = document.getElementById("productModal");
+const slider = modal ? modal.querySelector(".main-slider") : null;
+
+let startX = 0;
+let currentIndex = 0;
+let isSwiping = false;
 
 if (slider) {
   slider.addEventListener("touchstart", e => {
@@ -1290,7 +1295,6 @@ if (slider) {
 
     track.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-    // sincronizar thumbs
     const thumbs = document.getElementById("pm-thumbs");
     if (thumbs) {
       thumbs.querySelectorAll("img").forEach((t, i) => {
