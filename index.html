@@ -1206,11 +1206,11 @@ function openProduct(p){
 
   let currentIndex = 0;
 
-  // Carrusel principal
+  // Carrusel
   track.innerHTML = p.images.map(img => `<img src="${img}">`).join("");
   track.style.transform = "translateX(0%)";
 
-  // Miniaturas
+  // Thumbs
   thumbs.innerHTML = "";
   p.images.forEach((img, index) => {
     const t = document.createElement("img");
@@ -1227,7 +1227,7 @@ function openProduct(p){
     thumbs.appendChild(t);
   });
 
-  // Datos
+  // Texto
   title.textContent = p.title;
   desc.textContent = p.desc || "";
 
@@ -1242,6 +1242,9 @@ function openProduct(p){
   });
 
   variants.onchange = ()=> price.textContent = fmt(variants.value);
+
+  modal.style.display = "flex";
+}
 
   // Botones
   document.getElementById("pm-add").onclick = ()=>{
