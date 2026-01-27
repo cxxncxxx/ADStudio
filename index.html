@@ -321,10 +321,11 @@ footer{text-align:center;padding:20px;color:#666}
   user-select: none;
 }
 
-  .main-slider {
+.main-slider {
   overflow: hidden;
   width: 100%;
   border-radius: 16px;
+  touch-action: pan-y; /* scroll vertical OK */
 }
 
 .main-track {
@@ -336,7 +337,7 @@ footer{text-align:center;padding:20px;color:#666}
   width: 100%;
   flex-shrink: 0;
   user-select: none;
-  touch-action: pan-y;
+  pointer-events: none;
 }
 
 </style>
