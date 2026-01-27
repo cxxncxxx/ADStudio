@@ -57,7 +57,14 @@ header{background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-inde
 
 .card{background:#fff;border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
 .gallery{padding:10px;background:#fafafa}
-.main-img{width:100%;height:200px;object-fit:contain}
+
+  .main-img{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+  border-radius:12px;
+}
+  
 .thumbs{display:flex;justify-content:center;gap:8px;margin-top:8px}
 .thumbs img{width:50px;height:40px;opacity:.6;border-radius:6px;cursor:pointer}
 .thumbs img.active{opacity:1;border:2px solid #000}
@@ -122,11 +129,8 @@ footer{text-align:center;padding:20px;color:#666}
   }
 
   #productModal .main-img{
-    height: 220px;             /* imagen más baja */
-  }
-
-#productModal .main-img{
-  object-fit: contain;
+  height: 260px;
+  object-fit: cover;
 }
 
   #productModal .thumbs{
