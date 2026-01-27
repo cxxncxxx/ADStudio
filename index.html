@@ -1115,11 +1115,25 @@ function finalizarCarrito(){
   window.open(`https://wa.me/${WHATSAPP}?text=${msg}`,"_blank");
 }
 
+const catalog = document.getElementById("catalog");
+
 document.querySelectorAll(".cat-nav button").forEach(b=>{
   b.onclick=()=>{
-    document.querySelectorAll(".cat-nav button").forEach(x=>x.classList.remove("active"));
+
+    // activar botón
+    document.querySelectorAll(".cat-nav button")
+      .forEach(x=>x.classList.remove("active"));
     b.classList.add("active");
-    render(b.dataset.cat);
+
+    // animación salida
+    catalog.classList.add("fade-out");
+
+    setTimeout(()=>{
+      render(b.dataset.cat);
+
+      catalog.classList.remove("fade-out");
+      catalog.classList.add("fade-in");
+    }, 200);
   };
 });
 
@@ -1234,30 +1248,6 @@ pmMain.addEventListener("mouseleave", () => {
   pmMain.style.transformOrigin = "center center";
 });
 
-  <script>
-  const buttons = document.querySelectorAll('.cat-nav button');
-  const products = document.querySelector('.products');
-
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-
-      // activar botón
-      buttons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      // animación salida
-      products.classList.remove('fade-in');
-      products.classList.add('fade-out');
-
-      // simula carga / filtrado
-      setTimeout(() => {
-        // acá iría tu lógica real de filtrado
-
-        products.classList.remove('fade-out');
-        products.classList.add('fade-in');
-      }, 200);
-    });
-  });
 </script>
   
 </body>
