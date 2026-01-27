@@ -316,6 +316,11 @@ footer{text-align:center;padding:20px;color:#666}
   letter-spacing: .5px;
 }
 
+  .main-img {
+  touch-action: pan-y;
+  user-select: none;
+}
+
 </style>
 </head>
 
@@ -1280,7 +1285,35 @@ pmMain.addEventListener("mouseleave", () => {
   pmMain.style.transformOrigin = "center center";
 });
 
+<script>
+let startX = 0;
+let endX = 0;
+
+document.addEventListener("touchstart", e => {
+  if (!e.target.classList.contains("main-img")) return;
+  startX = e.touches[0].clientX;
+});
+
+document.addEventListener("touchend", e => {
+  if (!e.target.classList.contains("main-img")) return;
+  endX = e.changedTouches[0].clientX;
+
+  const diff = startX - endX;
+  if (Math.abs(diff) < 40) return; // swipe mínimo
+
+  const gallery = e.target.closest(".gallery");
+  const thumbs = gallery.querySelectorAll(".thumbs img");
+  let current = [...thumbs].findIndex(t => t.classList.contains("active"));
+
+  if (diff > 0 && current < thumbs.length - 1) {
+    thumbs[current + 1].click(); // swipe izquierda
+  }
+
+  if (diff < 0 && current > 0) {
+    thumbs[current - 1].click(); // swipe derecha
+  }
+});
 </script>
-  
+
 </body>
 </html>
