@@ -321,6 +321,24 @@ footer{text-align:center;padding:20px;color:#666}
   user-select: none;
 }
 
+  .main-slider {
+  overflow: hidden;
+  width: 100%;
+  border-radius: 16px;
+}
+
+.main-track {
+  display: flex;
+  transition: transform 0.35s ease;
+}
+
+.main-track img {
+  width: 100%;
+  flex-shrink: 0;
+  user-select: none;
+  touch-action: pan-y;
+}
+
 </style>
 </head>
 
@@ -371,10 +389,12 @@ footer{text-align:center;padding:20px;color:#666}
   <div class="modal-content">
 
     <div class="gallery">
-      <img id="pm-main" class="main-img">
-      <div class="thumbs" id="pm-thumbs"></div>
-    </div>
-
+  <div class="main-slider">
+  <div class="main-track" id="pm-track"></div>
+ </div>
+  <div class="thumbs" id="pm-thumbs"></div>
+ </div>
+    
     <h3 id="pm-title"></h3>
     <p class="price" id="pm-price"></p>
 
@@ -1175,35 +1195,86 @@ document.querySelectorAll(".cat-nav button").forEach(b=>{
 });
 
 function openProduct(p){
+
   const modal = document.getElementById("productModal");
-  const main = document.getElementById("pm-main");
+  const track = document.getElementById("pm-track");
   const thumbs = document.getElementById("pm-thumbs");
   const title = document.getElementById("pm-title");
   const price = document.getElementById("pm-price");
   const variants = document.getElementById("pm-variants");
   const desc = document.getElementById("pm-desc");
 
-  // Reset
+  let currentIndex = 0;
+
+  // Carrusel principal
+  track.innerHTML = p.images.map(img => `<img src="${img}">`).join("");
+  track.style.transform = "translateX(0%)";
+
+  // Miniaturas
   thumbs.innerHTML = "";
-  variants.innerHTML = "";
-
-  // Data
-  title.textContent = p.title;
-  desc.textContent = p.desc;
-  main.src = p.images[0];
-
-  // Images
-  p.images.forEach((img,i)=>{
+  p.images.forEach((img, index) => {
     const t = document.createElement("img");
     t.src = img;
-    if(i===0) t.classList.add("active");
-    t.onclick = ()=>{
-      main.src = img;
-      thumbs.querySelectorAll("img").forEach(x=>x.classList.remove("active"));
+    if(index === 0) t.classList.add("active");
+
+    t.onclick = () => {
+      currentIndex = index;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      thumbs.querySelectorAll("img").forEach(i => i.classList.remove("active"));
       t.classList.add("active");
     };
+
     thumbs.appendChild(t);
   });
+
+  // Datos
+  title.textContent = p.title;
+  desc.textContent = p.desc || "";
+
+  // Variantes
+  variants.innerHTML = "";
+  Object.entries(p.variants).forEach(([k,v],i)=>{
+    const o = document.createElement("option");
+    o.value = v;
+    o.textContent = k;
+    variants.appendChild(o);
+    if(i===0) price.textContent = fmt(v);
+  });
+
+  variants.onchange = ()=> price.textContent = fmt(variants.value);
+
+  // Botones
+  document.getElementById("pm-add").onclick = ()=>{
+    cart.push({
+      title:p.title,
+      variant:variants.options[variants.selectedIndex].text,
+      price:variants.value,
+      image:p.images[0]
+    });
+    cartTotal += Number(variants.value);
+    updateCartUI();
+    closeProduct();
+  };
+
+  document.getElementById("pm-buy").onclick = ()=>{
+    cart.length = 0;
+    cartTotal = Number(variants.value);
+
+    cart.push({
+      title:p.title,
+      category:p.category,
+      variant:variants.options[variants.selectedIndex].text,
+      price:variants.value,
+      image:p.images[0]
+    });
+
+    updateCartUI();
+    openCart();
+    closeProduct();
+  };
+
+  modal.style.display = "flex";
+}
 
   // Variants
   Object.entries(p.variants).forEach(([k,v],i)=>{
