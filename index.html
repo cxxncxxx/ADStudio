@@ -1258,6 +1258,50 @@ window.onload = () => {
   render();
 };
 
+let startX = 0;
+let isDragging = false;
+currentIndex = 0
+
+document.addEventListener("touchstart", e => {
+  const slider = e.target.closest(".main-slider");
+  if (!slider) return;
+
+  startX = e.touches[0].clientX;
+  isDragging = true;
+});
+
+document.addEventListener("touchend", e => {
+  if (!isDragging) return;
+
+  const slider = e.target.closest(".main-slider");
+  if (!slider) return;
+
+  const track = slider.querySelector(".main-track");
+  const imgs = track.querySelectorAll("img");
+
+  const endX = e.changedTouches[0].clientX;
+  const diff = startX - endX;
+
+  if (Math.abs(diff) < 50) {
+    isDragging = false;
+    return;
+  }
+
+  if (diff > 0 && currentIndex < imgs.length - 1) currentIndex++;
+  if (diff < 0 && currentIndex > 0) currentIndex--;
+
+  track.style.transform = `translateX(-${currentIndex * 100}%)`;
+  isDragging = false;
+
+  // sincronizar thumbs
+  const thumbs = document.getElementById("pm-thumbs");
+  if (thumbs) {
+    thumbs.querySelectorAll("img").forEach((t, i) => {
+      t.classList.toggle("active", i === currentIndex);
+    });
+  }
+});
+  
 </script>
 
 </body>
