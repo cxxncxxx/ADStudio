@@ -252,7 +252,43 @@ footer{text-align:center;padding:20px;color:#666}
     padding-right: 10px;
   }
 }
-  
+
+  .cat-nav button {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  transition: 
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.2s ease;
+}
+
+.cat-nav button:hover {
+  transform: scale(1.05);
+}
+
+.cat-nav button.active {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+  .products {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.products.fade-out {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.products.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 </style>
 </head>
 
@@ -1197,7 +1233,31 @@ pmMain.addEventListener("mouseleave", () => {
   pmMain.style.transform = "scale(1)";
   pmMain.style.transformOrigin = "center center";
 });
-  
+
+  <script>
+  const buttons = document.querySelectorAll('.cat-nav button');
+  const products = document.querySelector('.products');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+
+      // activar botón
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // animación salida
+      products.classList.remove('fade-in');
+      products.classList.add('fade-out');
+
+      // simula carga / filtrado
+      setTimeout(() => {
+        // acá iría tu lógica real de filtrado
+
+        products.classList.remove('fade-out');
+        products.classList.add('fade-in');
+      }, 200);
+    });
+  });
 </script>
   
 </body>
