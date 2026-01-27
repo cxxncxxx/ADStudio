@@ -1258,22 +1258,6 @@ window.onload = () => {
   render();
 };
 
-const pmMain = document.getElementById("pm-main");
-
-pmMain.addEventListener("mousemove", (e) => {
-  const rect = pmMain.getBoundingClientRect();
-  const x = ((e.clientX - rect.left) / rect.width) * 100;
-  const y = ((e.clientY - rect.top) / rect.height) * 100;
-
-  pmMain.style.transformOrigin = `${x}% ${y}%`;
-  pmMain.style.transform = "scale(2)";
-});
-
-pmMain.addEventListener("mouseleave", () => {
-  pmMain.style.transform = "scale(1)";
-  pmMain.style.transformOrigin = "center center";
-});
-
 let startX = 0;
 let endX = 0;
 
