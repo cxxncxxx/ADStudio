@@ -1266,10 +1266,6 @@ let currentIndex = 0;
 const modal = document.getElementById("productModal");
 const slider = modal ? modal.querySelector(".main-slider") : null;
 
-let startX = 0;
-let currentIndex = 0;
-let isSwiping = false;
-
 if (slider) {
   slider.addEventListener("touchstart", e => {
     startX = e.touches[0].clientX;
